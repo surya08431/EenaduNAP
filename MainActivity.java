@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //surya preakash
+        //surya prakash
 
 
         testtxt.setOnClickListener(new View.OnClickListener() {
