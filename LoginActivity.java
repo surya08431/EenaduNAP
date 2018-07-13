@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getLayoutInflater().inflate(R.layout.activity_login, frag_frame);
+
         setContentView(R.layout.activity_login);
 
         session = new SharedPreferenceData(LoginActivity.this);
@@ -35,23 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         edt_employeeid = (EditText)findViewById(R.id.edt_employeeid);
         edt_passwor = (EditText)findViewById(R.id.edt_passwor);
 
-       /* txt_loginhere.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainint = new Intent(LoginActivity.this,Registration.class);
-                startActivity(mainint);
-                finish();
-            }
-        });*/
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String getempid = edt_employeeid.getText().toString();
-                String getpassword = edt_passwor.getText().toString();
 
-                Intent mainint = new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(mainint);
-                finish();*/
 
                 if (CheckNetwork.isInternetAvailable(LoginActivity.this)) {
                     getempid = edt_employeeid.getText().toString();
@@ -64,8 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                         getempid = edt_employeeid.getText().toString();
                         getpassword = edt_passwor.getText().toString();
                         Log.e("dsbkfb", "kbkfb===>" + getempid + "  " + getpassword);
-                        //postRegDetails(ApiController.login + "&uname=" + pname + "&pwd=" + ppwd);
-                        //postRegDetails(ApiController.login);
+
                     }
 
 
@@ -75,74 +62,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-   /* private void postRegDetails(String url) {
-        Log.e("url", "url==>" + url);
 
-
-        final Map<String, String> postParameters = new HashMap<String, String>();
-        postParameters.put("empid", getempid);
-        postParameters.put("pwd", getpassword);
-
-
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(postParameters),
-                new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        Log.e("Response", "Response===>" + jsonObject.toString());
-                        try {
-
-                            JSONArray array = jsonObject.getJSONArray("login");
-
-                            if (array != null) {
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject job = array.getJSONObject(i);
-                                    String id = job.getString("message");
-                                    if (id.equalsIgnoreCase("success")) {
-                                        session.setLogged(true);
-                                        session.setUser(getempid.toString().trim());
-                                        Intent logint = new Intent(LoginActivity.this,MainActivity.class);
-                                        startActivity(logint);
-
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            }
-
-
-                        } catch (Exception e) {
-                            // TODO Auto-generated catch block
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("error", "error===>" + error.toString());
-
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(LoginActivity.this, "Uh.. TimeOut\", \"please check your network once and try again", Toast.LENGTH_SHORT).show();
-                } else if (error instanceof AuthFailureError) {
-                    Toast.makeText(LoginActivity.this, "Uh.. authentication problem\", \"please check your network once and try again", Toast.LENGTH_SHORT).show();
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(LoginActivity.this, "Uh.. content missing\", \"currently our server is too slow please try again after some time", Toast.LENGTH_SHORT).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(LoginActivity.this, "Uh.. authentication problem\", \"please check your network once and try again", Toast.LENGTH_SHORT).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(LoginActivity.this, "Uh.. content missing\", \"currently our server is too slow please try again", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
-        req.setRetryPolicy(new DefaultRetryPolicy(
-                60000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        AppController.getInstance().addToRequestQueue(req);
-    }*/
 }
